@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">YouFace</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_dashboard">Yo</string>
+    <string name="title_notifications">Subir</string>
+    <string name="titulo_splash"> YouFace APP </string>
+    <string name="mensaje"> Chat </string>
+</resources>
