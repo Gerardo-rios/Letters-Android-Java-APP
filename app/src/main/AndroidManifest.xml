@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="vista.Subir"></activity>
+        <activity android:name="vista.Registro"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name="vista.Login"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name="vista.Subir" />
         <activity android:name="vista.Perfil" />
         <activity android:name=".Splash">
             <intent-filter>

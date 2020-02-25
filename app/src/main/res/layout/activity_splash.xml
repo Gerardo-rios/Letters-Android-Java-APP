@@ -2,15 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ic_launcher_background">
+    android:background="@drawable/grdnt">
 
     <ImageView
         android:id="@+id/ivSplash"
         android:layout_width="120dp"
         android:layout_height="122dp"
-        android:layout_centerInParent="true"
-        android:paddingLeft="5dp"
 
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="147dp"
+        android:layout_marginTop="264dp"
+        android:layout_marginEnd="144dp"
+        android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:src="@drawable/mascaras" />
 

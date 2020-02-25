@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import vista.Login;
+
 public class Splash extends Activity {
 
     private final int DURACION_SPLASH = 1500;
@@ -35,7 +37,7 @@ public class Splash extends Activity {
 
         new Handler().postDelayed(new Runnable(){
             public void run(){
-                Intent intent = new Intent(Splash.this, MainActivity.class);
+                Intent intent = new Intent(Splash.this, Login.class);
                 startActivity(intent);
                 finish();
             };
