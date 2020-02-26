@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/grdnt"
     tools:context="vista.Subir">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="0dp"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.995"
-        app:itemBackground="@drawable/grdnt"
-        app:menu="@menu/bottom_nav_menu" />
+        android:layout_weight="1"
+        android:id="@+id/contenedor">
+    </FrameLayout>
 
     <LinearLayout
-        android:id="@+id/linear_layout_subir"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-
-        <TextView
-            android:id="@+id/texto_subir"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_gallery"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Activity Subir"
-            android:textAlignment="center"/>
+            android:layout_weight="1"
+            android:background="@drawable/shape_boton_sinfondo"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:text="Galeria"></Button>
+
+        <Button
+            android:id="@+id/btn_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="@drawable/shape_boton_sinfondo"
+            android:text="Foto"></Button>
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

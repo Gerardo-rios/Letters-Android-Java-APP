@@ -93,17 +93,30 @@
         <Button
             android:id="@+id/btn_editar_perfil"
             android:layout_width="380dp"
-            android:layout_marginLeft="18dp"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:background="@color/negro"
             android:layout_height="25dp"
-            android:text="Editar perfil" />
+            android:layout_marginLeft="8dp"
+            android:background="@color/negro"
+            android:text="Editar perfil"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/design_default_color_error" />
 
         <GridView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:columnWidth="100dp"
+            android:layout_marginTop="5dp"
+            android:numColumns="3"
+            android:gravity="center"
             android:id="@+id/fotos_usuario"/>
+
+
 
 
     </LinearLayout>

@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="vista.Fragmentos.galeria_fragmento"
+    android:background="@drawable/grdnt">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="100"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="60">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imagen_seleccionada"
+                android:scaleType="centerCrop">
+            </ImageView>
+
+            <ProgressBar
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/progeso_barra"
+                android:layout_centerInParent="true">
+            </ProgressBar>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:visibility="invisible">
+
+        </TextView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="@drawable/shape_boton_redondeado"
+            android:textSize="30dp"
+            android:text="SELECCIONA IMAGEN"
+            android:id="@+id/btn_selecciona_foto"></Button>
+        <!--
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="40"
+            android:id="@+id/grid_fotos_galeria"
+            android:numColumns="5"
+            android:verticalSpacing="1dp"
+            android:horizontalSpacing="1dp"
+            android:stretchMode="none"
+            android:gravity="center"
+            android:layout_marginTop="1dp">
+
+        </GridView> -->
+
+
+    </LinearLayout>
+
+</RelativeLayout>

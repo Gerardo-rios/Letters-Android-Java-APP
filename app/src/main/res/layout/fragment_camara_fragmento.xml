@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="vista.Fragmentos.camara_fragmento"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    android:gravity="center"
+    android:background="@drawable/grdnt">
+
+    <Button
+        android:id="@+id/btn_abrir_camara"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_boton_redondeado"
+        android:text="ABRIR CAMARA"
+        android:textSize="30dp"
+        android:textStyle="bold">
+
+    </Button>
+
+</RelativeLayout>

@@ -10,7 +10,7 @@ public class Usuario {
     private String celular;
     private String correo;
     private String external;
-    private boolean estado;
+    private String estado;
     private String password;
     private String foto;
 
@@ -79,14 +79,6 @@ public class Usuario {
         this.external = external;
     }
 
-    public boolean isStado() {
-        return estado;
-    }
-
-    public void setStado(boolean stado) {
-        this.estado = stado;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -101,5 +93,13 @@ public class Usuario {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

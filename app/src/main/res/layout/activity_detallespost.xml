@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grdnt"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/foto_usuario_post"
+            android:background="@drawable/shape_button_redondo">
+        </ImageButton>
+
+        <TextView
+            android:layout_width="320dp"
+            android:layout_height="40dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:id="@+id/txt_nombre_user_post">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/foto_opciones_post"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/grdnt"
+            android:src="@drawable/trespuntos">
+
+        </ImageView>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/post_foto"
+        android:layout_width="match_parent"
+        android:layout_height="412dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/btn_like"
+            android:layout_width="24dp"
+            android:layout_marginRight="5dp"
+            android:layout_height="24dp"
+            android:src="@drawable/corazon"/>
+
+        <ImageView
+            android:id="@+id/btn_coment"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/comentario"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_descripcion_post"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:text="Descripcion prro" />
+
+    <TextView
+        android:id="@+id/txt_num_comentarios_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#AEB6BF"
+        android:clickable="true"
+        android:focusable="false"
+        />
+
+    <TextView
+        android:id="@+id/txt_fecha_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:text="" />
+
+</LinearLayout>
