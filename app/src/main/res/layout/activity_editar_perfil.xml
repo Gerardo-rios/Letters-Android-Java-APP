@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/grdnt"
+    tools:context="vista.editar_perfil">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/shape_button_redondo"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center"
+        android:id="@+id/foto_edit_profile">
+
+    </ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/azul_claro"
+        android:textAlignment="center"
+        android:text="Cambiar foto de perfil"
+        android:clickable="true"
+        android:focusable="false"
+        android:layout_weight="0"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/btn_editar_foto_perfil">
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/casi_blanco"
+        android:text="Nombre ">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/txt_nombre_edit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="#fff"
+        android:letterSpacing="0.1"
+        android:inputType="text"
+        android:textStyle="bold">
+
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/casi_blanco"
+        android:text="Username">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/txt1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="#fff"
+        android:letterSpacing="0.1"
+        android:inputType="text"
+        android:editable="false"
+        android:enabled="false"
+        android:textStyle="bold">
+
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/casi_blanco"
+        android:text="Bio">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/txt_edit_bio"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="#fff"
+        android:letterSpacing="0.1"
+        android:inputType="text"
+        android:textStyle="bold">
+
+    </EditText>
+
+    <TextView
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Información del perfil">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/casi_blanco"
+        android:text="Correo Eletrónico">
+
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="#fff"
+        android:id="@+id/lbl_correo_cargar">
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/casi_blanco"
+        android:text="Celular">
+
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="#fff"
+        android:id="@+id/lbl_celular_cargar">
+    </TextView>
+
+</LinearLayout>

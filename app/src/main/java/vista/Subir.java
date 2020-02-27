@@ -27,6 +27,7 @@ public class Subir extends AppCompatActivity implements View.OnClickListener, ca
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subir);
         componentes();
+        foto.setActivated(true);
     }
 
     private void componentes(){

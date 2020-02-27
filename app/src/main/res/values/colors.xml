@@ -6,4 +6,6 @@
     <color name="negro">#000000</color>
     <color name="gris_claro">#6E7378</color>
     <color name="verde_diarrea">#536A59</color>
+    <color name="azul_claro">#152CD1</color>
+    <color name="casi_blanco">#DADCE3</color>
 </resources>

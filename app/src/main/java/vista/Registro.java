@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.ParseException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,12 +22,15 @@ import com.example.youface.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import Controlador.DatePickerFragment;
 import Controlador.UserVolley;
 
 public class Registro extends AppCompatActivity implements View.OnClickListener {
 
-    EditText correo, username, clave, celular, nacimiento;
+    EditText correo, username, clave, celular;
     TextView red_login, registrarse;
 
     UserVolley volley = new UserVolley(this);
@@ -44,8 +48,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         username = findViewById(R.id.username);
         clave = findViewById(R.id.clave);
         celular = findViewById(R.id.telefono);
-        nacimiento = findViewById(R.id.nacimiento);
-        nacimiento.setOnClickListener(this);
         red_login = findViewById(R.id.btn_redirigir_login);
         registrarse = findViewById(R.id.btn_enviar_registro);
         red_login.setOnClickListener(this);
@@ -53,17 +55,17 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
     }
 
-    private void showDatePickerDialog() {
+    /*private void showDatePickerDialog() {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                final String selectedDate = day + " / " + (month+1) + " / " + year;
+                final String selectedDate = year + "/" + (month+1) + "/" + day;
                 nacimiento.setText(selectedDate);
             }
         });
         newFragment.show(getSupportFragmentManager(), "datePicker");
-    }
+    }*/
 
     private boolean Registrado(){
 
@@ -71,14 +73,13 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         String usern = username.getText().toString();
         String pas = clave.getText().toString();
         String cel = celular.getText().toString();
-        String nac = nacimiento.getText().toString();
 
-        if (email.equals("") || usern.equals("") || pas.equals("") || cel.equals("") || nac.equals("")){
+        if (email.equals("") || usern.equals("") || pas.equals("") || cel.equals("")){
             Toast.makeText(this, "Debes llenar todos los campos primero", Toast.LENGTH_SHORT).show();
         } else {
             try {
 
-                JSONObject respuesta = volley.Registrarse(email, usern, pas, cel, nac);
+                JSONObject respuesta = volley.Registrarse(email, usern, pas, cel);
                 try {
                     String etiqueta = respuesta.getString("title");
                     String mensaje = respuesta.getString("msg");
@@ -115,10 +116,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         Intent intent;
 
         switch (v.getId()){
-
-            case R.id.nacimiento:
-                showDatePickerDialog();
-                break;
 
             case R.id.btn_redirigir_login:
                 intent = new Intent(Registro.this, Login.class);

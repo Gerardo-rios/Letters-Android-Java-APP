@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.example.youface">
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <dist:module dist:instant="true" />
@@ -15,24 +16,41 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="vista.Registro"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-        <activity android:name="vista.Login"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name="vista.Subir"
-            android:parentActivityName=".MainActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name="vista.editar_perfil"
+            android:parentActivityName="vista.Perfil">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="vista.Perfil">
             </meta-data>
         </activity>
-        <activity android:name="vista.Perfil"
+        <activity android:name="vista.Compartir"
+            android:parentActivityName="vista.Subir">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="vista.Subir">
+            </meta-data>
+        </activity>
+        <activity
+            android:name="vista.Registro"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="vista.Login"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="vista.Subir"
             android:parentActivityName=".MainActivity">
-        <meta-data android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity">
-        </meta-data>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name="vista.Perfil"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
         <activity android:name=".Splash">
             <intent-filter>
@@ -44,10 +62,12 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />
-        <activity android:name="vista.PostDetallesActivity"
+        <activity
+            android:name="vista.PostDetallesActivity"
             android:parentActivityName="vista.Perfil">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value="vista.Perfil"></meta-data>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="vista.Perfil" />
         </activity>
     </application>
 

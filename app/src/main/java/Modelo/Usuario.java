@@ -6,7 +6,6 @@ public class Usuario {
     private String nombre;
     private String username;
     private String descripcion;
-    private String fecha_nacimiento;
     private String celular;
     private String correo;
     private String external;
@@ -45,14 +44,6 @@ public class Usuario {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getFecha_nacimiento() {
-        return fecha_nacimiento;
-    }
-
-    public void setFecha_nacimiento(String fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
     }
 
     public String getCelular() {

@@ -130,36 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#4a5a71"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/calendario"
-                    android:layout_gravity="center"/>
-                <EditText
-                    android:id="@+id/nacimiento"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Nacimiento"
-                    android:textColorHint="#d9e5f3"
-                    android:layout_marginLeft="15dp"
-                    android:background="#00000000"
-                    android:clickable="true"
-                    android:focusable="false"
-                    android:letterSpacing="0.1"
-                    android:textSize="16dp"
-                    android:inputType="number"
-                    android:textColor="#fff"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#4a5a71"></LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
     <LinearLayout

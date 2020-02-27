@@ -63,15 +63,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 try {
                     String informacion = response.getString("information");
                     boolean suceso = response.getBoolean("success");
-                    JSONObject persona = response.getJSONObject("data");
                     if (suceso){
-
+                        JSONObject persona = response.getJSONObject("data");
                         user = new Usuario();
                         user.setId(persona.getString("user_id"));
                         user.setNombre(persona.getString("nombre"));
                         user.setUsername(persona.getString("username"));
                         user.setDescripcion(persona.getString("descripcion"));
-                        user.setFecha_nacimiento(persona.getString("fecha_nacimiento"));
                         user.setFoto(persona.getString("foto_perfil"));
                         user.setCelular(persona.getString("celular"));
                         user.setCorreo(persona.getString("correo"));
