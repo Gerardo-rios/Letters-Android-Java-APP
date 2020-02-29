@@ -118,5 +118,38 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
+        switch (v.getId()){
+
+            case R.id.btn_editar_perfil:
+
+                Intent i = new Intent(Perfil.this, editar_perfil.class);
+                startActivity(i);
+
+                break;
+
+        }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.logosalir, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case R.id.logout:
+
+
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

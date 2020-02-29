@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/seguir_post"
+        android:id="@+id/seguir_edit_foto"
         android:checked="false"
         android:iconTint="@color/azul_claro"
         android:title="Siguiente"

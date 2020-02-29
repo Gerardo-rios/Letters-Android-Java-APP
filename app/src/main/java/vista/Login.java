@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import Controlador.UserVolley;
+import Controlador.sync;
 import Modelo.Usuario;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
@@ -48,9 +49,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    private boolean logeado(){
+    private void logeado(){
 
-        String usern = username.getText().toString();
+        final String usern = username.getText().toString();
         String pas = clave.getText().toString();
 
         if (usern.equals("") || pas.equals("")){
@@ -58,41 +59,47 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         } else {
             try {
 
-                JSONObject response = volley.Logear(usern, pas);
+                volley.Logear(usern, pas, new sync() {
+                    @Override
+                    public void response(JSONObject json) {
 
-                try {
-                    String informacion = response.getString("information");
-                    boolean suceso = response.getBoolean("success");
-                    if (suceso){
-                        JSONObject persona = response.getJSONObject("data");
-                        user = new Usuario();
-                        user.setId(persona.getString("user_id"));
-                        user.setNombre(persona.getString("nombre"));
-                        user.setUsername(persona.getString("username"));
-                        user.setDescripcion(persona.getString("descripcion"));
-                        user.setFoto(persona.getString("foto_perfil"));
-                        user.setCelular(persona.getString("celular"));
-                        user.setCorreo(persona.getString("correo"));
-                        user.setEstado(persona.getString("status"));
-                        Toast.makeText(this, informacion, Toast.LENGTH_SHORT).show();
-                        return true;
-                    } else {
+                        try {
+                            String informacion = json.getString("information");
+                            boolean suceso = json.getBoolean("success");
+                            if (suceso){
+                                JSONObject persona = json.getJSONObject("data");
+                                user = new Usuario();
+                                user.setId(persona.getString("user_id"));
+                                user.setNombre(persona.getString("nombre"));
+                                user.setUsername(persona.getString("username"));
+                                user.setDescripcion(persona.getString("descripcion"));
+                                user.setFoto(persona.getString("foto_perfil"));
+                                user.setCelular(persona.getString("celular"));
+                                user.setExternal(persona.getString("external_id"));
+                                user.setCorreo(persona.getString("correo"));
+                                user.setEstado(persona.getString("status"));
+                                Log.d("user", user.getNombre() + "\n" + user.getCorreo() + "\n" + user.getId() +"\n" + user.getExternal());
+                                Toast.makeText(Login.this, informacion, Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Login.this, MainActivity.class);
+                                startActivity(intent);
+                            } else {
 
-                        Toast.makeText(this, informacion, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, informacion, Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (JSONException e) {
+                            Log.e("no se pudo obtener", "No se pudo obtener dato del json");
+                            e.printStackTrace();
+                        }
 
                     }
-                } catch (JSONException e) {
-                    Log.e("no se pudo obtener", "No se pudo obtener dato del json");
-                    e.printStackTrace();
-                }
+                });
 
             } catch (NullPointerException ex){
                 Log.e("otro click", "Mete otro click, dio null");
                 ex.printStackTrace();
             }
         }
-
-        return false;
     }
 
 
@@ -104,10 +111,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         switch (v.getId()){
 
             case R.id.btn_logear:
-                if (logeado()){
-                    intent = new Intent(Login.this, MainActivity.class);
-                    startActivity(intent);
-                }
+
+                logeado();
+
                 break;
             case R.id.btn_registrarse:
                 intent = new Intent(Login.this, Registro.class);

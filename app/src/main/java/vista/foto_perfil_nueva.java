@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,8 +18,7 @@ import com.example.youface.R;
 import vista.Fragmentos.camara_fragmento;
 import vista.Fragmentos.galeria_fragmento;
 
-
-public class Subir extends AppCompatActivity implements View.OnClickListener, camara_fragmento.OnFragmentInteractionListener, galeria_fragmento.OnFragmentInteractionListener {
+public class foto_perfil_nueva extends AppCompatActivity implements View.OnClickListener, camara_fragmento.OnFragmentInteractionListener, galeria_fragmento.OnFragmentInteractionListener{
 
     FrameLayout container;
     Button galeria, foto;
@@ -28,38 +26,39 @@ public class Subir extends AppCompatActivity implements View.OnClickListener, ca
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subir);
+        setContentView(R.layout.activity_foto_perfil_nueva);
         componentes();
         galeria.setPressed(true);
     }
 
     private void componentes(){
-        container = findViewById(R.id.contenedor);
-        galeria = findViewById(R.id.btn_gallery);
-        foto = findViewById(R.id.btn_camera);
+        container = findViewById(R.id.contenedor_perf);
+        galeria = findViewById(R.id.btn_gallery_perf);
+        foto = findViewById(R.id.btn_camera_perf);
         galeria.setOnClickListener(this);
         foto.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()){
 
-            case R.id.btn_camera:
+            case R.id.btn_camera_perf:
                 foto.setTextColor(Color.parseColor("#ffffff"));
                 galeria.setTextColor(Color.parseColor("#9E9E9E"));
                 camara_fragmento fragmento1 = new camara_fragmento();
                 FragmentTransaction transaccion1 = getSupportFragmentManager().beginTransaction();
-                transaccion1.replace(R.id.contenedor, fragmento1);
+                transaccion1.replace(R.id.contenedor_perf, fragmento1);
                 transaccion1.commit();
                 break;
-            case R.id.btn_gallery:
+            case R.id.btn_gallery_perf:
                 foto.setTextColor(Color.parseColor("#9E9E9E"));
                 galeria.setTextColor(Color.parseColor("#ffffff"));
                 galeria_fragmento fragmento2 = new galeria_fragmento();
                 FragmentTransaction transaccion2 = getSupportFragmentManager().beginTransaction();
-                transaccion2.replace(R.id.contenedor, fragmento2);
+                transaccion2.replace(R.id.contenedor_perf, fragmento2);
                 transaccion2.commit();
                 break;
 
@@ -75,10 +74,9 @@ public class Subir extends AppCompatActivity implements View.OnClickListener, ca
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_gallery_fragment, menu);
+        getMenuInflater().inflate(R.menu.otro_siguiente, menu);
 
         return true;
-
     }
 
     @Override
@@ -86,11 +84,7 @@ public class Subir extends AppCompatActivity implements View.OnClickListener, ca
 
         switch (item.getItemId()){
 
-            case R.id.seguir_post:
-                //siguiente en el nav
-                Intent intento = new Intent(Subir.this, Compartir.class);
-                //enviar datos al otro intento
-                startActivity(intento);
+            case R.id.seguir_edit_foto:
                 break;
 
         }

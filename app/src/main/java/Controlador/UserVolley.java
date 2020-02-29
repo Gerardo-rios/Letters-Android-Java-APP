@@ -22,20 +22,19 @@ import java.util.Map;
 
 public class UserVolley {
 
-    private String servidor = "http://192.168.0.104:8080";
+    private String servidor = ip.host();
     private String logear = "/usuario/logear";
     private String registrarse = "/usuario/registrar";
 
     private boolean estado;
     private String datos;
-    private JSONObject yeison;
     Context context;
 
     public UserVolley(Context contexto){
         this.context = contexto;
     }
 
-    public JSONObject Logear(String user, String password){
+    public void Logear(String user, String password, final sync asy){
 
         String url = servidor.concat(logear);
         JSONObject json = new JSONObject();
@@ -52,7 +51,7 @@ public class UserVolley {
             @Override
             public void onResponse(JSONObject response) {
 
-                yeison = response;
+                asy.response(response);
                 //Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
@@ -64,14 +63,12 @@ public class UserVolley {
         });
 
         Singleton.getInstance(context).addToRequestQueue(request);
-
-        return yeison;
     }
 
-    public JSONObject Registrarse(String mail, String user, String pass, String cell){
+    public void Registrarse(String mail, String user, String pass, String cell, final sync asy){
 
         String url = servidor.concat(registrarse);
-        JSONObject json = new JSONObject();
+        final JSONObject json = new JSONObject();
 
         try {
             json.put("correo", mail);
@@ -87,32 +84,15 @@ public class UserVolley {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                yeison = response;
+                asy.response(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //String er = error.getMessage();
-                error.printStackTrace();
-                Log.e("mal", "Mal error en response");
+                Log.e("mal", error.getMessage());
             }
-        })/*{
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String,String> parametros=new HashMap<>();
-                parametros.put("correo", mail);
-                parametros.put("username", user);
-                parametros.put("password", pass);
-                parametros.put("telefono", cell);
-                parametros.put("fecha_nacimiento", fecha);
-
-                return super.getParams();
-            }
-        }*/;
+        });
         Singleton.getInstance(context).addToRequestQueue(request);
-
-        return yeison;
     }
 
 }

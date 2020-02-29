@@ -18,19 +18,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="vista.editar_perfil"
+        <activity android:name="vista.foto_perfil_nueva"></activity>
+        <activity
+            android:name="vista.editar_perfil"
             android:parentActivityName="vista.Perfil">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="vista.Perfil">
-            </meta-data>
+                android:value="vista.Perfil"></meta-data>
         </activity>
-        <activity android:name="vista.Compartir"
+        <activity
+            android:name="vista.Compartir"
             android:parentActivityName="vista.Subir">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="vista.Subir">
-            </meta-data>
+                android:value="vista.Subir"></meta-data>
         </activity>
         <activity
             android:name="vista.Registro"

@@ -27,6 +27,7 @@ import java.util.Date;
 
 import Controlador.DatePickerFragment;
 import Controlador.UserVolley;
+import Controlador.sync;
 
 public class Registro extends AppCompatActivity implements View.OnClickListener {
 
@@ -67,7 +68,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }*/
 
-    private boolean Registrado(){
+    private void Registrado(){
 
         String email = correo.getText().toString();
         String usern = username.getText().toString();
@@ -79,27 +80,31 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         } else {
             try {
 
-                JSONObject respuesta = volley.Registrarse(email, usern, pas, cel);
-                try {
-                    String etiqueta = respuesta.getString("title");
-                    String mensaje = respuesta.getString("msg");
+                volley.Registrarse(email, usern, pas, cel, new sync() {
+                    @Override
+                    public void response(JSONObject json) {
+                        try {
+                            String etiqueta = json.getString("title");
+                            String mensaje = json.getString("msg");
 
-                    if (etiqueta.equals("registrado")){
+                            if (etiqueta.equals("registrado")){
 
-                        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
-                        return true;
+                                Toast.makeText(Registro.this, mensaje, Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Registro.this, Login.class);
+                                startActivity(intent);
 
-                    } else {
+                            } else {
 
-                        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
+                                Toast.makeText(Registro.this, mensaje, Toast.LENGTH_LONG).show();
 
+                            }
+
+                        } catch (JSONException e) {
+                            Log.e("no se pudo", "obtener atributos del json");
+                            e.printStackTrace();
+                        }
                     }
-
-                } catch (JSONException e) {
-                    Log.e("no se pudo", "obtener atributos del json");
-                    e.printStackTrace();
-                }
-
+                });
 
             } catch (NullPointerException ex){
                 ex.printStackTrace();
@@ -107,7 +112,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
             }
         }
 
-        return false;
     }
 
     @Override
@@ -123,12 +127,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.btn_enviar_registro:
-                if (Registrado()){
-
-                    intent = new Intent(Registro.this, Login.class);
-                    startActivity(intent);
-
-                }
+                Registrado();
                 break;
         }
 

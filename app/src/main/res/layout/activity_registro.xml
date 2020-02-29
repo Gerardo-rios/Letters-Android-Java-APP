@@ -38,7 +38,7 @@
                     android:background="#00000000"
                     android:letterSpacing="0.1"
                     android:textSize="16dp"
-                    android:inputType="text"
+                    android:inputType="textEmailAddress"
                     android:textColor="#fff"
                     />
             </LinearLayout>
@@ -67,6 +67,7 @@
                     android:letterSpacing="0.1"
                     android:textSize="16dp"
                     android:inputType="text"
+                    android:maxLength="12"
                     android:textColor="#fff"
                     />
             </LinearLayout>
@@ -93,6 +94,7 @@
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
                     android:inputType="textPassword"
+                    android:maxLength="12"
                     android:letterSpacing="0.1"
                     android:textSize="16dp"
                     android:textColor="#fff"
@@ -120,7 +122,8 @@
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
                     android:hint="Teléfono Movil"
-                    android:inputType="number"
+                    android:inputType="phone"
+                    android:maxLength="10"
                     android:letterSpacing="0.1"
                     android:textColor="#fff"
                     android:textColorHint="#d9e5f3"
