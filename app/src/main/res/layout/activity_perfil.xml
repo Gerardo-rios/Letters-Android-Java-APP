@@ -34,7 +34,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="93dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <ImageView
@@ -45,7 +46,10 @@
 
             <TextView
                 android:id="@+id/num_publi"
-                android:layout_width="106dp"
+                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:padding="13dp">
 
@@ -53,7 +57,10 @@
 
             <TextView
                 android:id="@+id/num_seguidores"
-                android:layout_width="106dp"
+                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:padding="13dp">
 
@@ -61,7 +68,10 @@
 
             <TextView
                 android:id="@+id/num_seguidos"
-                android:layout_width="106dp"
+                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:padding="13dp">
 
@@ -71,20 +81,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="91dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textAlignment="textStart"
+                android:textColor="#fff"
+                android:textSize="20dp"
                 android:id="@+id/nombre">
 
             </TextView>
 
             <TextView
                 android:id="@+id/descripcion"
+                android:textAlignment="textStart"
+                android:maxLines="5"
+                android:textColor="#fff"
                 android:layout_width="match_parent"
-                android:layout_height="68dp">
+                android:layout_height="wrap_content">
 
             </TextView>
 

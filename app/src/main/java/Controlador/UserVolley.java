@@ -25,9 +25,9 @@ public class UserVolley {
     private String servidor = ip.host();
     private String logear = "/usuario/logear";
     private String registrarse = "/usuario/registrar";
+    private String modificar_bio = "/usuario/modificar_perfil";
+    //private String obtenerme = "/obtener?id=";
 
-    private boolean estado;
-    private String datos;
     Context context;
 
     public UserVolley(Context contexto){
@@ -57,6 +57,7 @@ public class UserVolley {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "No se pudo obtener los datos, intente nuevamente", Toast.LENGTH_SHORT).show();
                 String er = error.getMessage();
                 Log.e("mal", er);
             }
@@ -89,10 +90,63 @@ public class UserVolley {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "No se pudo enviar los datos, intente nuevamente", Toast.LENGTH_SHORT).show();
                 Log.e("mal", error.getMessage());
             }
         });
         Singleton.getInstance(context).addToRequestQueue(request);
     }
+
+    public void EditarDatos(String id, String nombre, String desc, final sync sincronizador){
+
+        String url = servidor.concat(modificar_bio);
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("identificador", id);
+            json.put("nombre", nombre);
+            json.put("descripcion", desc);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                sincronizador.response(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+                Toast.makeText(context, "No se pudo enviar los datos, intente nuevamente", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Singleton.getInstance(context).addToRequestQueue(request);
+
+    }
+
+    /*public void Obtenerme(String id, final sync sincro){
+
+        String url = servidor + obtenerme + id;
+        JSONObject json = new JSONObject();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                sincro.response(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+                Toast.makeText(context, "No se pudo enviar los datos, intente nuevamente", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }*/
 
 }

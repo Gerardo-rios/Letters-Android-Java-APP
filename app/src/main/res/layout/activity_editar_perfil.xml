@@ -43,9 +43,10 @@
     <EditText
         android:id="@+id/txt_nombre_edit"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:textColor="#fff"
         android:letterSpacing="0.1"
+        android:maxLength="25"
         android:inputType="text"
         android:textStyle="bold">
 
@@ -61,9 +62,9 @@
     </TextView>
 
     <EditText
-        android:id="@+id/txt1"
+        android:id="@+id/lbl_username_edit"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:textColor="#fff"
         android:letterSpacing="0.1"
         android:inputType="text"
@@ -85,7 +86,7 @@
     <EditText
         android:id="@+id/txt_edit_bio"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:textColor="#fff"
         android:letterSpacing="0.1"
         android:inputType="text"

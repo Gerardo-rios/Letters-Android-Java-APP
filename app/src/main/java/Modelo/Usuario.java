@@ -53,7 +53,6 @@ public class Usuario {
     public void setCelular(String celular) {
         this.celular = celular;
     }
-
     public String getCorreo() {
         return correo;
     }

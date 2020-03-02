@@ -3,8 +3,11 @@ package vista;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +22,18 @@ import com.example.youface.MainActivity;
 import com.example.youface.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import Controlador.FollowVolley;
 import Controlador.GridAdapter;
+import Controlador.PostVolley;
+import Controlador.UserVolley;
+import Controlador.sync;
 
 public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,6 +42,9 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
     Button editar;
     GridView fotos_posts;
     GridAdapter adapter;
+    FollowVolley voly = new FollowVolley(this);
+    PostVolley pvol = new PostVolley(this);
+    String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +88,12 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
         obtener_componentes_visuales();
         cargarGrid();
-
+        DatosdeUser();
+        seguidores();
+        seguidos();
+        n_posteos();
     }
+
 
     private void obtener_componentes_visuales(){
 
@@ -90,7 +109,20 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
     }
 
+    private void DatosdeUser(){
+
+        SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
+        userid = preferences.getString("id", "");
+        nombre.setText(preferences.getString("nombre", "Edita tu nombre"));
+        this.setTitle(preferences.getString("username", ""));
+        String descri = preferences.getString("descripcion", "Pon una bio").replaceAll("/", "\n");
+        descripcion.setText(descri);
+    }
+
+
     private void cargarGrid(){
+
+        //ArrayList<String> url_foto = new ArrayList<>();
 
         ArrayList<Integer> fotos = new ArrayList<>();
 
@@ -110,6 +142,67 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                 intent.putExtra("Recurso", adapter.getItem(position).toString());
                 startActivity(intent);
 
+            }
+        });
+
+    }
+
+    private void seguidores(){
+
+        voly.Contar_Seguidores(userid, new sync() {
+            @Override
+            public void response(JSONObject json) {
+
+                try {
+                    JSONArray a = json.getJSONArray("a");
+                    String nu = a.getJSONObject(0).getString("numero_seguidores");
+                    String l = nu + "\n" + "Seguidores";
+                    n_seguidores.setText(l);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("nose pudo", "obtener string");
+                }
+
+            }
+        });
+
+    }
+
+    private void seguidos(){
+
+        voly.Contar_Seguidos(userid, new sync() {
+            @Override
+            public void response(JSONObject json) {
+
+                try {
+                    JSONArray a = json.getJSONArray("a");
+                    String nu = a.getJSONObject(0).getString("numero_seguidos");
+                    String l = nu + "\n" + "Seguidos";
+                    n_seguidos.setText(l);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("nose pudo", "obtener string");
+                }
+
+            }
+        });
+
+    }
+
+    private void n_posteos(){
+
+        pvol.List_Posts_User(userid, new sync() {
+            @Override
+            public void response(JSONObject json) {
+                try {
+                    JSONArray a = json.getJSONArray("p");
+                    String nu = String.valueOf(a.length());
+                    String l = nu + "\n" + "Posts";
+                    n_posts.setText(l);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("nose pudo", "obtener string");
+                }
             }
         });
 
@@ -146,6 +239,22 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
             case R.id.logout:
 
+                SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("id", "");
+                editor.putString("nombre", "");
+                editor.putString("username", "");
+                editor.putString("descripcion", "");
+                editor.putString("celular", "");
+                editor.putString("correo", "");
+                editor.putString("external", "");
+                editor.putString("estado", "");
+                editor.putString("foto", "");
+                editor.putBoolean("logeado", false);
+                editor.apply();
+
+                Intent intent = new Intent(Perfil.this, Login.class);
+                startActivity(intent);
 
                 break;
         }

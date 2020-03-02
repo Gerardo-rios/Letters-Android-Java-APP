@@ -2,7 +2,9 @@ package vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,13 +31,21 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     TextView logear, red_registro;
     EditText username, clave;
-    public static Usuario user;
+    Usuario user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         componentes_visuales();
+
+        SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
+        boolean logeado = preferences.getBoolean("logeado", false);
+        if  (logeado){
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     private void componentes_visuales(){
@@ -78,7 +88,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                 user.setExternal(persona.getString("external_id"));
                                 user.setCorreo(persona.getString("correo"));
                                 user.setEstado(persona.getString("status"));
-                                Log.d("user", user.getNombre() + "\n" + user.getCorreo() + "\n" + user.getId() +"\n" + user.getExternal());
+                                GuardarLogeado();
                                 Toast.makeText(Login.this, informacion, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Login.this, MainActivity.class);
                                 startActivity(intent);
@@ -102,6 +112,22 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    private void GuardarLogeado(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("id", user.getId());
+        editor.putString("nombre", user.getNombre());
+        editor.putString("username", user.getUsername());
+        editor.putString("descripcion", user.getDescripcion());
+        editor.putString("celular", user.getCelular());
+        editor.putString("correo", user.getCorreo());
+        editor.putString("external", user.getExternal());
+        editor.putString("estado", user.getEstado());
+        editor.putString("foto", user.getFoto());
+        editor.putBoolean("logeado", true);
+        editor.apply();
+    }
 
     @Override
     public void onClick(View v) {
