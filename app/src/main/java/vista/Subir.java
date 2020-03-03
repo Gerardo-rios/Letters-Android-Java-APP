@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import com.example.youface.R;
@@ -71,7 +72,7 @@ public class Subir extends AppCompatActivity implements View.OnClickListener, ca
     public void onFragmentInteraction(Uri uri) {
 
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -87,14 +88,14 @@ public class Subir extends AppCompatActivity implements View.OnClickListener, ca
         switch (item.getItemId()){
 
             case R.id.seguir_post:
-                //siguiente en el nav
+
                 Intent intento = new Intent(Subir.this, Compartir.class);
-                //enviar datos al otro intento
                 startActivity(intento);
+
                 break;
 
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

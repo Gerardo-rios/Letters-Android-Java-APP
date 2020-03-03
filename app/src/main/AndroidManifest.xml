@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="vista.foto_perfil_nueva"></activity>
+        <activity android:name="vista.foto_perfil_nueva">
+        </activity>
         <activity
             android:name="vista.editar_perfil"
             android:parentActivityName="vista.Perfil">
@@ -70,6 +71,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="vista.Perfil" />
         </activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>

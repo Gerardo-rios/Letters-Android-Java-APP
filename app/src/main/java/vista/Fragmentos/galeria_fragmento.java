@@ -2,6 +2,7 @@ package vista.Fragmentos;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -44,7 +45,7 @@ public class galeria_fragmento extends Fragment {
     private ImageView fotoasubir;
     private ProgressBar progressBar;
     private Button boton;
-    private Uri imageUri;
+    private Bitmap bitmap;
 
 
     public galeria_fragmento() {
@@ -94,7 +95,7 @@ public class galeria_fragmento extends Fragment {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.GONE);
-                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 gallery.setType("image/");
                 startActivityForResult(gallery.createChooser(gallery, "Selecciona la APP"), 10);
             }
@@ -106,10 +107,10 @@ public class galeria_fragmento extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK){
-            imageUri = data.getData();
-            fotoasubir.setImageURI(imageUri);
-        }
+
+            /*switch (requestCode){
+                case
+            }*/
     }
 
     // TODO: Rename method, update argument and hook method into UI event

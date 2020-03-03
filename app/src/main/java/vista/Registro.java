@@ -2,32 +2,21 @@ package vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.net.ParseException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.youface.MainActivity;
 import com.example.youface.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import Controlador.DatePickerFragment;
 import Controlador.UserVolley;
-import Controlador.sync;
+import Interfaces.sync;
 
 public class Registro extends AppCompatActivity implements View.OnClickListener {
 

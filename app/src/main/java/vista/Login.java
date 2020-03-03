@@ -5,12 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import Controlador.UserVolley;
-import Controlador.sync;
+import Interfaces.sync;
 import Modelo.Usuario;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {

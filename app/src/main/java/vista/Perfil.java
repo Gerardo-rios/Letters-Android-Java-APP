@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.youface.MainActivity;
 import com.example.youface.R;
@@ -26,14 +25,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import Controlador.FollowVolley;
 import Controlador.GridAdapter;
 import Controlador.PostVolley;
-import Controlador.UserVolley;
-import Controlador.sync;
+import Interfaces.sync;
 
 public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
@@ -90,7 +87,6 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         cargarGrid();
         DatosdeUser();
         seguidores();
-        seguidos();
         n_posteos();
     }
 
@@ -149,15 +145,19 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
     private void seguidores(){
 
-        voly.Contar_Seguidores(userid, new sync() {
+        voly.Contar_S(userid, new sync() {
             @Override
             public void response(JSONObject json) {
 
                 try {
-                    JSONArray a = json.getJSONArray("a");
+                    JSONArray a = json.getJSONArray("seguidores");
+                    JSONArray b = json.getJSONArray("seguidos");
                     String nu = a.getJSONObject(0).getString("numero_seguidores");
+                    String ne = b.getJSONObject(0).getString("numero_seguidos");
                     String l = nu + "\n" + "Seguidores";
+                    String x = ne + "\n" + "Seguidos";
                     n_seguidores.setText(l);
+                    n_seguidos.setText(x);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("nose pudo", "obtener string");
@@ -168,26 +168,6 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    private void seguidos(){
-
-        voly.Contar_Seguidos(userid, new sync() {
-            @Override
-            public void response(JSONObject json) {
-
-                try {
-                    JSONArray a = json.getJSONArray("a");
-                    String nu = a.getJSONObject(0).getString("numero_seguidos");
-                    String l = nu + "\n" + "Seguidos";
-                    n_seguidos.setText(l);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.e("nose pudo", "obtener string");
-                }
-
-            }
-        });
-
-    }
 
     private void n_posteos(){
 

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -23,7 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import Controlador.UserVolley;
-import Controlador.sync;
+import Interfaces.sync;
 
 public class editar_perfil extends AppCompatActivity implements View.OnClickListener{
 

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="vista.Fragmentos.galeria_fragmento"
+    android:screenOrientation="portrait"
     android:background="@drawable/grdnt">
 
     <LinearLayout
@@ -51,20 +52,6 @@
             android:textSize="30dp"
             android:text="SELECCIONA IMAGEN"
             android:id="@+id/btn_selecciona_foto"></Button>
-        <!--
-        <GridView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="40"
-            android:id="@+id/grid_fotos_galeria"
-            android:numColumns="5"
-            android:verticalSpacing="1dp"
-            android:horizontalSpacing="1dp"
-            android:stretchMode="none"
-            android:gravity="center"
-            android:layout_marginTop="1dp">
-
-        </GridView> -->
 
 
     </LinearLayout>

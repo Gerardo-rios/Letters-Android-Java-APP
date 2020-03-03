@@ -2,23 +2,17 @@ package Controlador;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.textclassifier.TextLinks;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import Interfaces.sync;
 
 public class UserVolley {
 
@@ -26,7 +20,6 @@ public class UserVolley {
     private String logear = "/usuario/logear";
     private String registrarse = "/usuario/registrar";
     private String modificar_bio = "/usuario/modificar_perfil";
-    //private String obtenerme = "/obtener?id=";
 
     Context context;
 
@@ -107,6 +100,7 @@ public class UserVolley {
             json.put("nombre", nombre);
             json.put("descripcion", desc);
         } catch (JSONException e) {
+            Log.e("Error json", "No se pudo enviar parametros");
             e.printStackTrace();
         }
 
@@ -129,24 +123,5 @@ public class UserVolley {
 
     }
 
-    /*public void Obtenerme(String id, final sync sincro){
-
-        String url = servidor + obtenerme + id;
-        JSONObject json = new JSONObject();
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, json, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                sincro.response(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("error", error.getMessage());
-                Toast.makeText(context, "No se pudo enviar los datos, intente nuevamente", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }*/
 
 }

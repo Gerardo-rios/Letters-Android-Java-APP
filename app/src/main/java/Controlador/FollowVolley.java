@@ -11,7 +11,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
 
-import java.lang.reflect.Method;
+import Interfaces.sync;
 
 public class FollowVolley {
 
@@ -19,60 +19,32 @@ public class FollowVolley {
     private String seguir = "/";
     private String list_seguidos = "/listar_seguidos";
     private String list_seguidores = "/listar_seguidores";
-    private String cont_seguidores = "/seguir/contar_seguidores";
-    private String cont_seguidos = "/seguir/contar_seguidos";
+    private String contar = "/usuario/contar?authid=";
+
     Context context;
 
     public FollowVolley(Context contexto){
         this.context = contexto;
     }
 
-    public void Contar_Seguidores(String id, final sync sincro){
+    public void Contar_S(String id, final sync sincro){
 
-        String url = servidor + cont_seguidores + "?authid=" + id;
-        JSONObject json = new JSONObject();
+        String url = servidor + contar + id;
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, json, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 sincro.response(response);
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("malado", error.getMessage());
-                Toast.makeText(context, "No se pudo realizar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "No se pudo obtener los datos, intente nuevamente", Toast.LENGTH_SHORT).show();
+                Log.e("error", error.getMessage());
             }
         });
 
         Singleton.getInstance(context).addToRequestQueue(request);
     }
-
-    public void Contar_Seguidos(String id, final sync sincro){
-
-        String url = servidor + cont_seguidos + "?authid=" + id;
-        JSONObject json = new JSONObject();
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, json, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-
-                sincro.response(response);
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("malado", error.getMessage());
-                Toast.makeText(context, "No se pudo realizar", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        Singleton.getInstance(context).addToRequestQueue(request);
-    }
-
-
 
 }
