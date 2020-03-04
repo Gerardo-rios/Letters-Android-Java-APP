@@ -13,6 +13,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+
 import Interfaces.sync;
 
 public class PostVolley {
@@ -52,7 +54,7 @@ public class PostVolley {
 
     }
 
-    public void Postear(String id, Bitmap foto, String descripcion, final sync sincro){
+    public void Postear(String id, File foto, String descripcion, final sync sincro){
 
         String url = server.concat(postear);
         JSONObject json = new JSONObject();

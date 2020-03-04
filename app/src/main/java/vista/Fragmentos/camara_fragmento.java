@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -186,14 +187,6 @@ public class camara_fragmento extends Fragment {
 
         if (resultCode == RESULT_OK){
 
-                /*MediaScannerConnection.scanFile(getContext(), new String[]{path}, null,
-                        new MediaScannerConnection.OnScanCompletedListener() {
-                            @Override
-                            public void onScanCompleted(String pat, Uri uri) {
-                                //Log.d("Almacennada en: ", "Ruta: " + path);
-                            }
-                        });*/
-
                 bitmap = BitmapFactory.decodeFile(path);
                 foto_tomada.setImageBitmap(rotar(bitmap));
                 pb.setVisibility(View.GONE);
@@ -256,8 +249,15 @@ public class camara_fragmento extends Fragment {
             @Override
             public void onClick(View v) {
                 ReducirTamano();
+                MediaScannerConnection.scanFile(getContext(), new String[]{path}, null,
+                        new MediaScannerConnection.OnScanCompletedListener() {
+                            @Override
+                            public void onScanCompleted(String pat, Uri uri) {
+                                Log.d("Almacennada en: ", "Ruta: " + path);
+                            }
+                        });
                 Intent intento = new Intent(getActivity(), Compartir.class);
-                intento.putExtra("BitmapImage", bitmap);
+                intento.putExtra("BitmapImage", path);
                 startActivity(intento);
             }
         });
@@ -273,7 +273,7 @@ public class camara_fragmento extends Fragment {
 
     private void ReducirTamano(){
         ByteArrayOutputStream array = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 0, array);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, array);
     }
 
     @Override
