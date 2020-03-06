@@ -47,7 +47,15 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+        cargarNav();
+        obtener_componentes_visuales();
+        cargarGrid();
+        DatosdeUser();
+        seguidores();
+        n_posteos();
+    }
 
+    private void cargarNav(){
         BottomNavigationView navView = findViewById(R.id.nav_view);
         Menu menu = navView.getMenu();
         MenuItem menuItem = menu.getItem(2);
@@ -82,14 +90,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                 return false;
             }
         });
-
-        obtener_componentes_visuales();
-        cargarGrid();
-        DatosdeUser();
-        seguidores();
-        n_posteos();
     }
-
 
     private void obtener_componentes_visuales(){
 
@@ -111,7 +112,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         userid = preferences.getString("id", "");
         nombre.setText(preferences.getString("nombre", "Edita tu nombre"));
         this.setTitle(preferences.getString("username", ""));
-        String descri = preferences.getString("descripcion", "Pon una bio").replaceAll("/", "\n");
+        String descri = preferences.getString("descripcion", "Pon una bio");
         descripcion.setText(descri);
     }
 
@@ -122,7 +123,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
         ArrayList<Integer> fotos = new ArrayList<>();
 
-        fotos.add(R.drawable.mascaras);
+        fotos.add(R.drawable.emoji);
         fotos.add(R.drawable.message);
         fotos.add(R.drawable.calendario);
         fotos.add(R.drawable.casa);
@@ -175,13 +176,13 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void response(JSONObject json) {
                 try {
-                    JSONArray a = json.getJSONArray("p");
+                    JSONArray a = json.getJSONArray("data");
                     String nu = String.valueOf(a.length());
                     String l = nu + "\n" + "Posts";
                     n_posts.setText(l);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.e("nose pudo", "obtener string");
+                    Log.e("Error al obtener posts", "No se pudo obtener valores");
                 }
             }
         });

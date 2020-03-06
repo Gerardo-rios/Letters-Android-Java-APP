@@ -78,7 +78,7 @@ public class Compartir extends AppCompatActivity implements View.OnClickListener
         String desc = txt.getText().toString();
         if (!id.equals("") && !desc.equals("")){
 
-            volley.Postear(id, null, desc, new sync() {
+            volley.Postear(id, desc, new sync() {
                 @Override
                 public void response(JSONObject json) {
                     String title = "";

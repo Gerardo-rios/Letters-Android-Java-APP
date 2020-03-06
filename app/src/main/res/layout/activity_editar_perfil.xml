@@ -87,11 +87,14 @@
     <EditText
         android:id="@+id/txt_edit_bio"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:textColor="#fff"
+        android:layout_height="100dp"
+        android:textStyle="bold"
+        android:textColor="@color/casi_blanco"
+        android:inputType="text|textMultiLine"
+        android:maxLength="200"
         android:letterSpacing="0.1"
-        android:inputType="text"
-        android:textStyle="bold">
+        android:maxLines="4"
+        android:gravity="top">
 
     </EditText>
 

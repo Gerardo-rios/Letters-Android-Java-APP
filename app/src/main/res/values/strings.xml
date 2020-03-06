@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">YouFace</string>
+    <string name="app_name">IndirectAs</string>
     <string name="title_home">Inicio</string>
     <string name="title_dashboard">Yo</string>
     <string name="title_notifications">Subir</string>
-    <string name="titulo_splash"> YouFace APP </string>
+    <string name="titulo_splash"> IndirectAs </string>
     <string name="mensaje"> Chat </string>
 
     <!-- TODO: Remove or change this placeholder text -->

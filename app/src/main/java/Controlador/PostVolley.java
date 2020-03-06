@@ -54,15 +54,14 @@ public class PostVolley {
 
     }
 
-    public void Postear(String id, File foto, String descripcion, final sync sincro){
+    public void Postear(String id, String contenido, final sync sincro){
 
         String url = server.concat(postear);
         JSONObject json = new JSONObject();
 
         try {
             json.put("identificador", id);
-            json.put("foto", foto);
-            json.put("descripcion", descripcion);
+            json.put("contenido", contenido);
         } catch (JSONException e) {
             Log.e("Error json", "No se pudo enviar parametros");
             e.printStackTrace();

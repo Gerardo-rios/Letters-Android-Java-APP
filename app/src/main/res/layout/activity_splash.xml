@@ -19,7 +19,7 @@
         android:layout_marginEnd="144dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:src="@drawable/mascaras" />
+        android:src="@drawable/emoji" />
 
     <TextView
         android:id="@+id/textView2"

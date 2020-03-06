@@ -26,22 +26,26 @@
 
         </TextView>
 
-        <ImageView
-            android:id="@+id/foto_opciones_post_i"
+        <ImageButton
+            android:id="@+id/btn_opciones_post_i"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="7dp"
-            android:background="@drawable/grdnt"
-            android:src="@drawable/trespuntos">
+            android:background="@drawable/trespuntos"
+            >
 
-        </ImageView>
+        </ImageButton>
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/post_foto_i"
+    <TextView
+        android:id="@+id/post_indirecta_i"
         android:layout_width="match_parent"
-        android:layout_height="412dp"
+        android:textStyle="italic"
+        android:textColor="@color/casi_blanco"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:layout_height="280dp"
         />
 
     <LinearLayout
@@ -50,30 +54,22 @@
         android:orientation="horizontal">
 
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_like_i"
             android:layout_width="24dp"
             android:layout_marginRight="5dp"
             android:layout_height="24dp"
-            android:src="@drawable/corazon"/>
+            android:background="@drawable/corazon"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_coment_i"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/comentario"
+            android:background="@drawable/comentario"
             />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/txt_descripcion_post_i"
-        android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:text="Descripcion prro" />
 
     <TextView
         android:id="@+id/txt_num_comentarios_post_i"
