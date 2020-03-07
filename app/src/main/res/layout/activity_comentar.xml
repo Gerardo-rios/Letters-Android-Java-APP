@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grdnt"
+    android:orientation="vertical"
+    tools:context="vista.Comentar">
+
+    <EditText
+        android:id="@+id/txt_comentar_contenido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/casi_blanco"
+        android:inputType="text|textMultiLine"
+        android:maxLength="200"
+        android:letterSpacing="0.1"
+        android:padding="5dp"
+        android:maxLines="3"
+        android:gravity="top">
+    </EditText>
+
+    <Button
+        android:id="@+id/btn_comentar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enviar Comentario"
+        android:layout_gravity="center"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_boton_redondeado">
+
+    </Button>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/comentarios_recicler">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

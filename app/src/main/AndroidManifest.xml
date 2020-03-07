@@ -18,21 +18,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="vista.foto_perfil_nueva">
+        <activity android:name="vista.Comentar"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
+        <activity android:name="vista.foto_perfil_nueva" />
         <activity
             android:name="vista.editar_perfil"
             android:parentActivityName="vista.Perfil">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="vista.Perfil"></meta-data>
+                android:value="vista.Perfil" />
         </activity>
         <activity
             android:name="vista.Compartir"
             android:parentActivityName="vista.Subir">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="vista.Subir"></meta-data>
+                android:value="vista.Subir" />
         </activity>
         <activity
             android:name="vista.Registro"
@@ -71,6 +76,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="vista.Perfil" />
         </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -78,7 +84,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 

@@ -20,6 +20,7 @@ public class UserVolley {
     private String logear = "/usuario/logear";
     private String registrarse = "/usuario/registrar";
     private String modificar_bio = "/usuario/modificar_perfil";
+    private String obtener = "/obtener?id=";
 
     Context context;
 
@@ -121,6 +122,29 @@ public class UserVolley {
 
         Singleton.getInstance(context).addToRequestQueue(request);
 
+    }
+
+    public void ObtenerUsuario(String id, final sync sincro){
+
+        String url = servidor + obtener + id;
+        JSONObject json = new JSONObject();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                sincro.response(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+                Toast.makeText(context, "No se pudo obtener usuario", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Singleton.getInstance(context).addToRequestQueue(request);
     }
 
 
