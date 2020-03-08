@@ -6,51 +6,53 @@
     android:layout_height="match_parent"
     android:background="@drawable/grdnt"
     android:screenOrientation="portrait"
-    android:gravity="center">
+    >
 
     <LinearLayout
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:id="@+id/foto_usuario_post"
             android:background="@drawable/shape_button_redondo">
         </ImageButton>
 
-        <TextView
-            android:layout_width="320dp"
-            android:layout_height="40dp"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:id="@+id/txt_nombre_user_post">
-
-        </TextView>
-
-        <ImageView
-            android:id="@+id/foto_opciones_post"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="7dp"
-            android:background="@drawable/grdnt"
-            android:src="@drawable/trespuntos">
-
-        </ImageView>
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/post_foto"
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/post_indirecta"
         android:layout_width="match_parent"
-        android:layout_height="412dp"
+        android:textStyle="italic"
+        android:textColor="@color/casi_blanco"
+        android:textSize="20dp"
+        android:padding="20dp"
+        android:background="@drawable/shape_boton_sinfondo"
+        android:layout_height="wrap_content"
         />
 
     <LinearLayout
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_numero_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            />
 
 
         <ImageView
@@ -58,7 +60,16 @@
             android:layout_width="24dp"
             android:layout_marginRight="5dp"
             android:layout_height="24dp"
-            android:src="@drawable/corazon"/>
+            android:src="@drawable/corazon_rojo"/>
+
+        <TextView
+            android:id="@+id/txt_num_comentarios_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            />
 
         <ImageView
             android:id="@+id/btn_coment"
@@ -68,31 +79,7 @@
             android:src="@drawable/comentario"
             />
 
+
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/txt_descripcion_post"
-        android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:text="Descripcion prro" />
-
-    <TextView
-        android:id="@+id/txt_num_comentarios_post"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#AEB6BF"
-        android:clickable="true"
-        android:focusable="false"
-        />
-
-    <TextView
-        android:id="@+id/txt_fecha_post"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
-        android:text="" />
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package vista;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -14,16 +15,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.youface.MainActivity;
 import com.example.youface.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import Controlador.AdaptadoComentarios;
+import Controlador.AdaptadorHomePosts;
 import Controlador.PostVolley;
 import Interfaces.sync;
 import Modelo.Comentario;
+import Modelo.Post;
 
 public class Comentar extends AppCompatActivity {
 
@@ -32,6 +39,7 @@ public class Comentar extends AppCompatActivity {
     EditText contenido;
     PostVolley sw = new PostVolley(this);
     List<Comentario> list_coments;
+    AdaptadoComentarios adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,7 @@ public class Comentar extends AppCompatActivity {
                 comentar();
             }
         });
+        listar();
     }
 
     private String DatosdeUser(){
@@ -59,7 +68,7 @@ public class Comentar extends AppCompatActivity {
 
         Intent intent = getIntent();
         String userid = DatosdeUser();
-        String postid = intent.getStringExtra("id_post");
+        String postid = intent.getStringExtra("post_id");
         String content = contenido.getText().toString();
 
         if (userid.equals("") || postid.equals("") || content.equals("")){
@@ -74,7 +83,9 @@ public class Comentar extends AppCompatActivity {
 
                     try {
                         if (json.getString("title").equals("comentado")){
+                            contenido.setText("");
                             Toast.makeText(Comentar.this, "Comentario Guardado", Toast.LENGTH_SHORT).show();
+                            listar();
                         } else {
                             Toast.makeText(Comentar.this, "Ocurrio un error", Toast.LENGTH_SHORT).show();
                         }
@@ -92,7 +103,42 @@ public class Comentar extends AppCompatActivity {
 
     public void listar(){
 
+        Intent intent = getIntent();
+        String idp = intent.getStringExtra("post_id");
 
+        sw.ListarComents(idp, new sync() {
+            @Override
+            public void response(JSONObject json) {
+
+                try {
+                    boolean s = json.getBoolean("success");
+                    if (s){
+                        JSONArray data = json.optJSONArray("data");
+                        list_coments = new ArrayList<>();
+                        for (int i=0; i<data.length(); i++){
+                            list_coments.add(new Comentario(data.getJSONObject(i)));
+                        }
+                        //conteo();
+                        CargarRecycler();
+                    } else {
+                        Toast.makeText(Comentar.this, "Ocurrio un error, intentalo mas tarde", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    Log.e("ERROR", "NO SE PUDO OBTENER DATA");
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
+    private void CargarRecycler(){
+
+        adapter = new AdaptadoComentarios(list_coments);
+        recicler.setLayoutManager(new LinearLayoutManager(this));
+        recicler.setAdapter(adapter);
 
     }
 

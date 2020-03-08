@@ -27,16 +27,6 @@
 
         </TextView>
 
-        <ImageButton
-            android:id="@+id/btn_opciones_post_i"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="7dp"
-            android:background="@drawable/trespuntos"
-            >
-
-        </ImageButton>
-
     </LinearLayout>
 
     <TextView

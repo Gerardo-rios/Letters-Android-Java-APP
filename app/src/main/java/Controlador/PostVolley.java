@@ -2,8 +2,11 @@ package Controlador;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.telephony.mbms.MbmsErrors;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -25,9 +28,12 @@ public class PostVolley {
     private String postear = "/post/postear";
     private String listar = "/post/listar_todos";
     private String posts_user = "/post/listar_user_posts";
-    private String comentar = "/comentar/";
+    private String comentar = "/comentar";
     private String listar_coments = "/comentar/listar?postid=";
     private String contar_lc = "/post/contar?postid=";
+    private String like = "/like";
+    private String dislike = "/like/quitar";
+    private String obtener = "/post/obtener?postid=";
 
     Context context;
 
@@ -166,9 +172,9 @@ public class PostVolley {
 
     }
 
-    public void ContarLikes_Coments(Post poste, final sync sincro){
+    public void ContarLikes_Coments(String poste, final sync sincro){
 
-        String url = server + contar_lc + poste.getId();
+        String url = server + contar_lc + poste;
         JSONObject json = new JSONObject();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, json, new Response.Listener<JSONObject>() {
             @Override
@@ -187,6 +193,91 @@ public class PostVolley {
 
         Singleton.getInstance(context).addToRequestQueue(request);
 
+    }
+
+    public void Likear(String postid, String userid, final sync sincro){
+
+        String url = server.concat(like);
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("userid", userid);
+            jsonObject.put("postid", postid);
+        } catch (JSONException e) {
+            Log.e("JSON", "No se pudo meter los datos para likear");
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                sincro.response(response);
+                //Toast.makeText(context, "Likeado", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("MALSISIMO", error.getMessage());
+                Toast.makeText(context, "No se pudo hacer like, intentalo mas tarde", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Singleton.getInstance(context).addToRequestQueue(request);
+    }
+
+    public void Deslikear(String postid, String userid, final sync sincro){
+
+        String url = server.concat(dislike);
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("userid", userid);
+            jsonObject.put("postid", postid);
+        } catch (JSONException e) {
+            Log.e("JSON", "No se pudo meter los datos para deslikear");
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                sincro.response(response);
+                Toast.makeText(context, "Deslikeado", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("MALSISIMO", error.getMessage());
+                //Toast.makeText(context, "No se pudo quitar like, intentalo mas tarde", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Singleton.getInstance(context).addToRequestQueue(request);
+    }
+
+    public void ObtenerPoste(String id, final sync sincro){
+
+        String url = server + obtener + id;
+        JSONObject json = new JSONObject();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                sincro.response(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+                Toast.makeText(context, "No se pudo obtener usuario", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Singleton.getInstance(context).addToRequestQueue(request);
     }
 
 

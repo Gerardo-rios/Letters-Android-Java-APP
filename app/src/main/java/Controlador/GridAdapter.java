@@ -6,17 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.youface.R;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import Modelo.Post;
 
 public class GridAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Integer> list;
+    private ArrayList<String> list;
 
-    public GridAdapter(Context contexto, ArrayList<Integer> lista){
+    public GridAdapter(Context contexto, ArrayList<String> lista){
 
         this.context = contexto;
         this.list = lista;
@@ -47,8 +51,8 @@ public class GridAdapter extends BaseAdapter {
 
         }
 
-        ImageView imagen = (ImageView) convertView.findViewById(R.id.image_grid);
-        imagen.setImageResource(list.get(position));
+        TextView content = (TextView) convertView.findViewById(R.id.post_contenido_grid);
+        content.setText(list.get(position));
 
         return convertView;
     }

@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void CargarRecycler(){
 
-        adapter = new AdaptadorHomePosts(lista);
+        adapter = new AdaptadorHomePosts(lista, this);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
 

@@ -20,24 +20,28 @@ import android.widget.TextView;
 import com.example.youface.MainActivity;
 import com.example.youface.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Controlador.FollowVolley;
 import Controlador.GridAdapter;
 import Controlador.PostVolley;
+import Controlador.ip;
 import Interfaces.sync;
+import Modelo.Post;
 
 public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
     ImageView foto_perfil;
     TextView n_posts, n_seguidores, n_seguidos, nombre, descripcion;
     Button editar;
-    GridView fotos_posts;
+    GridView texts_posts;
     GridAdapter adapter;
     FollowVolley voly = new FollowVolley(this);
     PostVolley pvol = new PostVolley(this);
@@ -49,7 +53,6 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_perfil);
         cargarNav();
         obtener_componentes_visuales();
-        cargarGrid();
         DatosdeUser();
         seguidores();
         n_posteos();
@@ -100,7 +103,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         n_seguidos = findViewById(R.id.num_seguidos);
         nombre = findViewById(R.id.nombre);
         descripcion = findViewById(R.id.descripcion);
-        fotos_posts = findViewById(R.id.fotos_usuario);
+        texts_posts = findViewById(R.id.fotos_usuario);
         editar = findViewById(R.id.btn_editar_perfil);
         editar.setOnClickListener(this);
 
@@ -114,29 +117,23 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         this.setTitle(preferences.getString("username", ""));
         String descri = preferences.getString("descripcion", "Pon una bio");
         descripcion.setText(descri);
+        String foto = preferences.getString("foto", "default_user.pbg");
+        Picasso.get().load(ip.public_images() + foto).into(foto_perfil);
     }
 
 
-    private void cargarGrid(){
+    private void cargarGrid(ArrayList<String> postes, final ArrayList<String> posteid){
 
-        //ArrayList<String> url_foto = new ArrayList<>();
+        adapter = new GridAdapter(this, postes);
+        texts_posts.setAdapter(adapter);
 
-        ArrayList<Integer> fotos = new ArrayList<>();
-
-        fotos.add(R.drawable.emoji);
-        fotos.add(R.drawable.message);
-        fotos.add(R.drawable.calendario);
-        fotos.add(R.drawable.casa);
-
-        adapter = new GridAdapter(this, fotos);
-        fotos_posts.setAdapter(adapter);
-
-        fotos_posts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        texts_posts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent intent = new Intent(Perfil.this, PostDetallesActivity.class);
                 intent.putExtra("Recurso", adapter.getItem(position).toString());
+                intent.putExtra("Posteid", posteid.get(position).toString());
                 startActivity(intent);
 
             }
@@ -176,10 +173,22 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void response(JSONObject json) {
                 try {
-                    JSONArray a = json.getJSONArray("data");
-                    String nu = String.valueOf(a.length());
-                    String l = nu + "\n" + "Posts";
-                    n_posts.setText(l);
+                    if (json.getBoolean("success")){
+                        JSONArray a = json.getJSONArray("data");
+                        String nu = String.valueOf(a.length());
+                        String l = nu + "\n" + "Posts";
+                        n_posts.setText(l);
+                        ArrayList<String> posts = new ArrayList<>();
+                        ArrayList<String> posteid = new ArrayList<>();
+                        for (int i=0; i<a.length(); i++){
+                            JSONObject j = a.getJSONObject(i);
+                            posts.add(j.getString("contenido"));
+                            posteid.add(j.getString("post_id"));
+                        }
+                        cargarGrid(posts, posteid);
+                    } else {
+                        Log.e("e", "Error");
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("Error al obtener posts", "No se pudo obtener valores");

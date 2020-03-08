@@ -17,11 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.youface.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import Controlador.UserVolley;
+import Controlador.ip;
 import Interfaces.sync;
 
 public class editar_perfil extends AppCompatActivity implements View.OnClickListener{
@@ -59,7 +61,7 @@ public class editar_perfil extends AppCompatActivity implements View.OnClickList
         nombre.setText(preferences.getString("nombre", ""));
         username.setText(preferences.getString("username", ""));
         bio.setText(preferences.getString("descripcion", ""));
-        //preferences.getString("foto", "");
+        Picasso.get().load(ip.public_images() + preferences.getString("foto", "default_user.png")).into(foto_p);
         cell.setText(preferences.getString("celular", ""));
         correo.setText(preferences.getString("correo", ""));
 
