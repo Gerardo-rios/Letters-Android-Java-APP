@@ -2,6 +2,7 @@ package vista.Fragmentos;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.youface.R;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import Controlador.UserVolley;
+import vista.Perfil;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -44,9 +53,9 @@ public class galeria_fragmento extends Fragment {
 
     private ImageView fotoasubir;
     private ProgressBar progressBar;
-    private Button boton;
+    private Button boton, terminar;
     private Bitmap bitmap;
-
+    UserVolley sw = new UserVolley(getContext());
 
     public galeria_fragmento() {
         // Required empty public constructor
@@ -89,7 +98,7 @@ public class galeria_fragmento extends Fragment {
         fotoasubir = vista.findViewById(R.id.imagen_seleccionada);
         boton = vista.findViewById(R.id.btn_selecciona_foto);
         progressBar = vista.findViewById(R.id.progeso_barra);
-
+        terminar = vista.findViewById(R.id.terminar);
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +109,14 @@ public class galeria_fragmento extends Fragment {
                 startActivityForResult(gallery.createChooser(gallery, "Selecciona la APP"), 10);
             }
         });
+        terminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SubirFoto();
+                Intent intento = new Intent(getActivity(), Perfil.class);
+                startActivity(intento);
+            }
+        });
 
         return vista;
     }
@@ -108,9 +125,39 @@ public class galeria_fragmento extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-            /*switch (requestCode){
-                case
-            }*/
+            if (resultCode == RESULT_OK){
+
+                Uri mypath = data.getData();
+                //fotoasubir.setImageURI(mypath);
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), mypath);
+                    fotoasubir.setImageBitmap(bitmap);
+                } catch (IOException e) {
+                    Log.e("Err", "Error bitmap");
+                    e.printStackTrace();
+                }
+                terminar.setVisibility(View.VISIBLE);
+            }
+
+    }
+
+    private void SubirFoto(){
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        String ide = preferences.getString("id", "");
+        String foto = convertirImagen(bitmap);
+        sw.CambiarFoto(ide, foto);
+
+    }
+
+    private String convertirImagen(Bitmap bitmapa){
+
+        ByteArrayOutputStream array = new ByteArrayOutputStream();
+        bitmapa.compress(Bitmap.CompressFormat.JPEG, 50, array);
+        byte[] imagenByte = array.toByteArray();
+        String imagenString = Base64.encodeToString(imagenByte, Base64.DEFAULT);
+
+        return  imagenString;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

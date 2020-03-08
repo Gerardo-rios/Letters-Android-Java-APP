@@ -21,6 +21,7 @@ public class UserVolley {
     private String registrarse = "/usuario/registrar";
     private String modificar_bio = "/usuario/modificar_perfil";
     private String obtener = "/obtener?id=";
+    private String cambiar_foto = "/usuario/actualizar_foto";
 
     Context context;
 
@@ -28,6 +29,12 @@ public class UserVolley {
         this.context = contexto;
     }
 
+    /**
+     * LOgear en la aplicacion
+     * @param user
+     * @param password
+     * @param asy
+     */
     public void Logear(String user, String password, final sync asy){
 
         String url = servidor.concat(logear);
@@ -60,6 +67,14 @@ public class UserVolley {
         Singleton.getInstance(context).addToRequestQueue(request);
     }
 
+    /**
+     * Registrarse en la aplicacion
+     * @param mail
+     * @param user
+     * @param pass
+     * @param cell
+     * @param asy
+     */
     public void Registrarse(String mail, String user, String pass, String cell, final sync asy){
 
         String url = servidor.concat(registrarse);
@@ -91,6 +106,13 @@ public class UserVolley {
         Singleton.getInstance(context).addToRequestQueue(request);
     }
 
+    /**
+     * Editar los datos del usuario, bio y nombre.
+     * @param id
+     * @param nombre
+     * @param desc
+     * @param sincronizador
+     */
     public void EditarDatos(String id, String nombre, String desc, final sync sincronizador){
 
         String url = servidor.concat(modificar_bio);
@@ -124,7 +146,46 @@ public class UserVolley {
 
     }
 
-    public void ObtenerUsuario(String id, final sync sincro){
+    /**
+     * Cambiar la foto de perfil de usuario
+     * @param id
+     * @param foto
+     */
+    public void CambiarFoto(String id, String foto){
+
+        String url = servidor.concat(cambiar_foto);
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("id", id);
+            jsonObject.put("foto", foto);
+            jsonObject.put("hos", servidor);
+        } catch (JSONException e) {
+            Log.e("Error json", "no se pudo insertar datos en el json foto");
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                Log.d("Buenardo", "Actualizada");
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error", error.getMessage());
+                //Toast.makeText(context, "No se pudo enviar los datos, intentelo mas tarde", Toast.LENGTH_SHORT).show();
+                Log.e("Malardo", "No se hizo coneccion para la foto");
+            }
+        });
+        Singleton.getInstance(context).addToRequestQueue(request);
+    }
+
+
+
+ /*   public void ObtenerUsuario(String id, final sync sincro){
 
         String url = servidor + obtener + id;
         JSONObject json = new JSONObject();
@@ -146,6 +207,10 @@ public class UserVolley {
 
         Singleton.getInstance(context).addToRequestQueue(request);
     }
+    */
+
+
+
 
 
 }

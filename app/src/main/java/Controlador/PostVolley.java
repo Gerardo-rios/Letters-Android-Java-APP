@@ -41,6 +41,11 @@ public class PostVolley {
         this.context = contexto;
     }
 
+    /**
+     * Listar los post de un usuario
+     * @param id
+     * @param sincro
+     */
     public void List_Posts_User(String id, final sync sincro){
 
         String url = server + posts_user + "?identificador=" + id;
@@ -65,6 +70,12 @@ public class PostVolley {
 
     }
 
+    /**
+     * Realizar un post de un escrito
+     * @param id
+     * @param contenido
+     * @param sincro
+     */
     public void Postear(String id, String contenido, final sync sincro){
 
         String url = server.concat(postear);
@@ -97,6 +108,10 @@ public class PostVolley {
 
     }
 
+    /**
+     * Listar todos los posts
+     * @param sincro
+     */
     public void ListarPosts(final sync sincro){
 
         String url = server.concat(listar);
@@ -120,6 +135,13 @@ public class PostVolley {
 
     }
 
+    /**
+     * Hacer un comentario a un post
+     * @param postid
+     * @param userid
+     * @param contenido
+     * @param sincro
+     */
     public void Comentar(String postid, String userid, String contenido, final sync sincro){
 
         String url = server.concat(comentar);
@@ -149,6 +171,11 @@ public class PostVolley {
 
     }
 
+    /**
+     * Contenido de los comentarios de un post
+     * @param postid
+     * @param sincro
+     */
     public void ListarComents(String postid, final sync sincro){
 
         String url = server + listar_coments + postid;
@@ -172,6 +199,12 @@ public class PostVolley {
 
     }
 
+
+    /**
+     * Likes y comentarios de un POST
+     * @param poste
+     * @param sincro
+     */
     public void ContarLikes_Coments(String poste, final sync sincro){
 
         String url = server + contar_lc + poste;
@@ -195,6 +228,12 @@ public class PostVolley {
 
     }
 
+    /**
+     * Likear un post
+     * @param postid
+     * @param userid
+     * @param sincro
+     */
     public void Likear(String postid, String userid, final sync sincro){
 
         String url = server.concat(like);
@@ -226,6 +265,12 @@ public class PostVolley {
         Singleton.getInstance(context).addToRequestQueue(request);
     }
 
+    /**
+     * Quitar LIke a un post
+     * @param postid
+     * @param userid
+     * @param sincro
+     */
     public void Deslikear(String postid, String userid, final sync sincro){
 
         String url = server.concat(dislike);
@@ -257,6 +302,11 @@ public class PostVolley {
         Singleton.getInstance(context).addToRequestQueue(request);
     }
 
+    /**
+     * Obtener Post
+     * @param id
+     * @param sincro
+     */
     public void ObtenerPoste(String id, final sync sincro){
 
         String url = server + obtener + id;

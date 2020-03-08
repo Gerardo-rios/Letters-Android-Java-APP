@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.youface.MainActivity;
 import com.example.youface.R;
 
 import java.io.ByteArrayInputStream;
@@ -38,7 +41,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
+import Controlador.UserVolley;
 import vista.Compartir;
+import vista.Perfil;
+import vista.editar_perfil;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -72,6 +78,8 @@ public class camara_fragmento extends Fragment {
     Button boton, seguir;
     ProgressBar pb;
     Bitmap bitmap;
+    UserVolley sw = new UserVolley(getContext());
+
 
     public camara_fragmento() {
         // Required empty public constructor
@@ -191,6 +199,7 @@ public class camara_fragmento extends Fragment {
                 foto_tomada.setImageBitmap(rotar(bitmap));
                 pb.setVisibility(View.GONE);
                 seguir.setVisibility(View.VISIBLE);
+
         }
 
 
@@ -248,20 +257,40 @@ public class camara_fragmento extends Fragment {
         seguir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ReducirTamano();
                 MediaScannerConnection.scanFile(getContext(), new String[]{path}, null,
                         new MediaScannerConnection.OnScanCompletedListener() {
                             @Override
                             public void onScanCompleted(String pat, Uri uri) {
                                 Log.d("Almacennada en: ", "Ruta: " + path);
                             }
-                        });
-                Intent intento = new Intent(getActivity(), Compartir.class);
-                intento.putExtra("BitmapImage", path);
+                        }
+                );
+                SubirFoto();
+                Intent intento = new Intent(getActivity(), Perfil.class);
                 startActivity(intento);
+
             }
         });
         return vista;
+    }
+
+    private String convertirImagen(Bitmap bitmapa){
+
+        ByteArrayOutputStream array = new ByteArrayOutputStream();
+        bitmapa.compress(Bitmap.CompressFormat.JPEG, 50, array);
+        byte[] imagenByte = array.toByteArray();
+        String imagenString = Base64.encodeToString(imagenByte, Base64.DEFAULT);
+
+        return  imagenString;
+    }
+
+    private void SubirFoto(){
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        String ide = preferences.getString("id", "");
+        String foto = convertirImagen(rotar(bitmap));
+        sw.CambiarFoto(ide, foto);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -271,10 +300,6 @@ public class camara_fragmento extends Fragment {
         }
     }
 
-    private void ReducirTamano(){
-        ByteArrayOutputStream array = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, array);
-    }
 
     @Override
     public void onAttach(Context context) {

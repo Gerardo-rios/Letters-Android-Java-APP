@@ -80,7 +80,7 @@ public class AdaptadorHomePosts extends RecyclerView.Adapter<AdaptadorHomePosts.
             }
         });
 
-        Picasso.get().load(ip.public_images() + lista.get(position).getUser_foto()).into(holder.foto_user);
+        Picasso.get().load(ip.host() + lista.get(position).getUser_foto()).resize(120, 120).into(holder.foto_user);
 
     }
 

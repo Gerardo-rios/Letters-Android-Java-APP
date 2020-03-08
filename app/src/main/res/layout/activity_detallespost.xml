@@ -8,23 +8,6 @@
     android:screenOrientation="portrait"
     >
 
-    <LinearLayout
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:id="@+id/foto_usuario_post"
-            android:background="@drawable/shape_button_redondo">
-        </ImageButton>
-
-
-    </LinearLayout>
-
     <TextView
         android:layout_marginTop="20dp"
         android:id="@+id/post_indirecta"
@@ -81,5 +64,12 @@
 
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/coments_re_pe">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

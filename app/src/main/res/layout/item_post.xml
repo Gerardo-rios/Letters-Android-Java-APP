@@ -13,14 +13,14 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/foto_usuario_post_i"
-            android:background="@drawable/shape_button_redondo">
+            >
 
         </ImageButton>
 
         <TextView
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorPrimary"
             android:padding="15dp"
             android:textStyle="bold"
             android:id="@+id/txt_nombre_user_post_i">

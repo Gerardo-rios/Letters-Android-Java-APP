@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.youface.R;
 import com.squareup.picasso.Picasso;
@@ -18,9 +20,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Controlador.AdaptadoComentarios;
 import Controlador.PostVolley;
 import Controlador.ip;
 import Interfaces.sync;
+import Modelo.Comentario;
 
 public class PostDetallesActivity extends AppCompatActivity {
 
@@ -29,6 +36,9 @@ public class PostDetallesActivity extends AppCompatActivity {
     PostVolley sw = new PostVolley(this);
     ImageView foto_perfil;
     ImageView coment;
+    List<Comentario> list_coments;
+    AdaptadoComentarios adapter;
+    RecyclerView recicler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,17 +46,18 @@ public class PostDetallesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detallespost);
 
         post = findViewById(R.id.post_indirecta);
-        foto_perfil = findViewById(R.id.foto_usuario_post);
+        //foto_perfil = findViewById(R.id.foto_usuario_post);
         nl = findViewById(R.id.txt_numero_likes);
         nc = findViewById(R.id.txt_num_comentarios_post);
         coment = findViewById(R.id.btn_coment);
+        recicler = findViewById(R.id.coments_re_pe);
 
         post.setText(getIntent().getExtras().get("Recurso").toString());
         posteid = getIntent().getStringExtra("Posteid");
 
         conteo();
-        user();
-
+        //user();
+        listar();
         coment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +91,7 @@ public class PostDetallesActivity extends AppCompatActivity {
         });
 
     }
-
+/*
     private void user(){
 
         sw.ObtenerPoste(posteid, new sync() {
@@ -93,8 +104,8 @@ public class PostDetallesActivity extends AppCompatActivity {
                         JSONArray a = json.getJSONArray("data");
                         JSONObject j = a.getJSONObject(0);
                         PostDetallesActivity.this.setTitle(j.getString("username"));
-                        String url_foto = ip.public_images() + j.getString("foto_perfil");
-                        Picasso.get().load(url_foto).into(foto_perfil);
+                        String url_foto = ip.host() + j.getString("foto_perfil");
+                        Picasso.get().load(url_foto).resize(300, 300).into(foto_perfil);
                     } else {
                         Toast.makeText(PostDetallesActivity.this, "Ocurrio un error inesperado", Toast.LENGTH_SHORT).show();
                     }
@@ -105,6 +116,44 @@ public class PostDetallesActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+*/
+    public void listar(){
+
+        sw.ListarComents(posteid, new sync() {
+            @Override
+            public void response(JSONObject json) {
+
+                try {
+                    boolean s = json.getBoolean("success");
+                    if (s){
+                        JSONArray data = json.optJSONArray("data");
+                        list_coments = new ArrayList<>();
+                        for (int i=0; i<data.length(); i++){
+                            list_coments.add(new Comentario(data.getJSONObject(i)));
+                        }
+                        //conteo();
+                        CargarRecycler();
+                    } else {
+                        Toast.makeText(PostDetallesActivity.this, "Ocurrio un error, intentalo mas tarde", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    Log.e("ERROR", "NO SE PUDO OBTENER DATA");
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
+    private void CargarRecycler(){
+
+        adapter = new AdaptadoComentarios(list_coments);
+        recicler.setLayoutManager(new LinearLayoutManager(this));
+        recicler.setAdapter(adapter);
 
     }
 

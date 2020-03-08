@@ -117,7 +117,15 @@ public class MainActivity extends AppCompatActivity {
         recycler.setAdapter(adapter);
 
     }
-/*
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intento = new Intent(MainActivity.this, MainActivity.class);
+        startActivity(intento);
+    }
+
+    /*
     private void conteo(){
 
         for (int i = 0; i < lista.size(); i++){

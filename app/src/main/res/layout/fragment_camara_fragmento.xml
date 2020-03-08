@@ -64,7 +64,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="15"
+            android:layout_weight="8"
             android:textColor="#fff"
             android:textStyle="bold"
             android:visibility="invisible">
@@ -78,7 +78,7 @@
             android:layout_weight="0"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:text="Continuar"
+            android:text="Terminar"
             android:visibility="invisible"
             android:id="@+id/btn_seguir_compartir_foto">
 

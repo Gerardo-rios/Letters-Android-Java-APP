@@ -51,9 +51,31 @@
             android:background="@drawable/shape_boton_redondeado"
             android:textSize="30dp"
             android:text="SELECCIONA IMAGEN"
-            android:id="@+id/btn_selecciona_foto"></Button>
+            android:id="@+id/btn_selecciona_foto">
 
+        </Button>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:visibility="invisible">
+
+        </TextView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/terminar"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_boton_redondeado"
+            android:text="Terminar"
+            android:visibility="invisible"
+            >
+
+        </Button>
     </LinearLayout>
+
+
 
 </RelativeLayout>

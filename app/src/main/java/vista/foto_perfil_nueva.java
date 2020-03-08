@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.youface.R;
 
@@ -71,6 +72,7 @@ public class foto_perfil_nueva extends AppCompatActivity implements View.OnClick
 
     }
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -85,10 +87,15 @@ public class foto_perfil_nueva extends AppCompatActivity implements View.OnClick
         switch (item.getItemId()){
 
             case R.id.seguir_edit_foto:
+
+                Toast.makeText(this, "hola", Toast.LENGTH_SHORT).show();
+
                 break;
 
         }
 
         return super.onOptionsItemSelected(item);
     }
+    */
+
 }

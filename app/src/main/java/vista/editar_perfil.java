@@ -61,7 +61,7 @@ public class editar_perfil extends AppCompatActivity implements View.OnClickList
         nombre.setText(preferences.getString("nombre", ""));
         username.setText(preferences.getString("username", ""));
         bio.setText(preferences.getString("descripcion", ""));
-        Picasso.get().load(ip.public_images() + preferences.getString("foto", "default_user.png")).into(foto_p);
+        Picasso.get().load(ip.host() + preferences.getString("foto", "profile_pictures/default_user.png")).resize(120, 120).into(foto_p);
         cell.setText(preferences.getString("celular", ""));
         correo.setText(preferences.getString("correo", ""));
 

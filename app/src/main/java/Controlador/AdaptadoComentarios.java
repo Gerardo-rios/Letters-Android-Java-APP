@@ -39,7 +39,7 @@ public class AdaptadoComentarios extends RecyclerView.Adapter<AdaptadoComentario
 
         holder.usn.setText(comentarios.get(position).getUsname());
         holder.content.setText(comentarios.get(position).getContenido());
-        Picasso.get().load(ip.public_images() + comentarios.get(position).getUsfoto()).into(holder.fpu);
+        Picasso.get().load(ip.host() + comentarios.get(position).getUsfoto()).resize(50, 50).into(holder.fpu);
     }
 
     @Override

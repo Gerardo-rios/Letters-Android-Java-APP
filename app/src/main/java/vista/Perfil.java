@@ -43,7 +43,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
     Button editar;
     GridView texts_posts;
     GridAdapter adapter;
-    FollowVolley voly = new FollowVolley(this);
+    //FollowVolley voly = new FollowVolley(this);
     PostVolley pvol = new PostVolley(this);
     String userid;
 
@@ -54,7 +54,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         cargarNav();
         obtener_componentes_visuales();
         DatosdeUser();
-        seguidores();
+        //seguidores();
         n_posteos();
     }
 
@@ -99,8 +99,8 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
         foto_perfil = findViewById(R.id.foto_perfil);
         n_posts = findViewById(R.id.num_publi);
-        n_seguidores = findViewById(R.id.num_seguidores);
-        n_seguidos = findViewById(R.id.num_seguidos);
+        //n_seguidores = findViewById(R.id.num_seguidores);
+        //n_seguidos = findViewById(R.id.num_seguidos);
         nombre = findViewById(R.id.nombre);
         descripcion = findViewById(R.id.descripcion);
         texts_posts = findViewById(R.id.fotos_usuario);
@@ -117,8 +117,8 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         this.setTitle(preferences.getString("username", ""));
         String descri = preferences.getString("descripcion", "Pon una bio");
         descripcion.setText(descri);
-        String foto = preferences.getString("foto", "default_user.pbg");
-        Picasso.get().load(ip.public_images() + foto).into(foto_perfil);
+        String foto = preferences.getString("foto", "profile_pictures/default_user.pbg");
+        Picasso.get().load(ip.host() + foto).into(foto_perfil);
     }
 
 
@@ -141,6 +141,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
     }
 
+    /*
     private void seguidores(){
 
         voly.Contar_S(userid, new sync() {
@@ -165,6 +166,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         });
 
     }
+    */
 
 
     private void n_posteos(){

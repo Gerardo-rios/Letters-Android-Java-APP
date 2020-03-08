@@ -46,6 +46,7 @@ public class Subir extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_subir);
         cargarNav();
         componentes();
+        contador.setText("Puede escribir 280 caracteres");
     }
 
     private void cargarNav(){
